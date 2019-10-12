@@ -1,6 +1,6 @@
-require "project_cli/version"
+require "nokogiri"
+require "open-uri"
+require "pry"
 
-module ProjectCli
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./project_cli/cli"
+require_relative "./project_cli/trail"
