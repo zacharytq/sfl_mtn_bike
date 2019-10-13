@@ -1,3 +1,4 @@
+
 class ProjectCli::Trail
   attr_accessor :name, :county, :region
   @@all = []
