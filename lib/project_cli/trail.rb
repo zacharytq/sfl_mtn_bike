@@ -27,4 +27,10 @@ class ProjectCli::Trail
   def self.search_by_region(input)
     self.all.select {|i| i.region == input.capitalize}
   end
+  
+  def self.scrape_trails
+    ProjectCli::Scraper.scrape_trails.each do |trail|
+      self.create_from_object(trail)
+    end
+  end
 end
