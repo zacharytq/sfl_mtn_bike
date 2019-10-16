@@ -1,6 +1,6 @@
 
 class ProjectCli::Trail
-  attr_accessor :name, :county, :region
+  attr_accessor :name, :area, :region, :difficulty
   @@all = []
   def initialize
     @@all << self
@@ -11,10 +11,6 @@ class ProjectCli::Trail
   end
 
   def self.list_all_trails
-    trail_1 = self.new
-    trail_1.name = "JD"
-    trail_1.county = "Indiantown"
-    trail_1.region = "Central"
     self.all.each do |trail|
       puts trail.name
     end
@@ -28,9 +24,37 @@ class ProjectCli::Trail
     self.all.select {|i| i.region == input.capitalize}
   end
   
+  def self.create_from_object(object)
+    new_trail = ProjectCli::Trail.new
+    new_trail.name = object[:name]
+    new_trail.area = object[:area]
+    new_trail.difficulty = object[:difficulty]
+    new_trail.region = object[:region]
+    new_trail
+    
+  end
+  
   def self.scrape_trails
-    ProjectCli::Scraper.scrape_trails.each do |trail|
+    ProjectCli::Scraper.trails.each do |trail|
       self.create_from_object(trail)
     end
   end
+  
+  def self.find_trails_by_area(input, list = self.all)
+    list.select {|i| i.area == input)
+  end
+  
+  def self.find_trails_by_region(input, list = self.all)
+    list.select {|i| i.region == input)
+  end
+  
+  def self.find_trails_by_difficulty(input, list = self.all)
+    list.select {|i| i.difficulty == input)
+  end
+  
+  def self.find_trail_by_name(input, list = self.all)
+    list.select {|i| i.name.downcase == input.downcase)
+  end
+  
+  
 end
