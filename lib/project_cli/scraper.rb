@@ -12,7 +12,7 @@ class ProjectCli::Scraper
       doc = Nokogiri::HTML(open(region))
       doc.search("div.col-sm-6 div.area a").map do |i|
         output = {}
-        output[:region] = i.search("h1").text
+        output[:region] = doc.search("h1")
         output[:area] = i.search("div.link").text
         output[:url] = i.attribute("href").value
         output
@@ -22,24 +22,18 @@ class ProjectCli::Scraper
   end
   
   
-  def self.trail_urls
-    output = self.scrape_region.map do |region|
-      doc = Nokogiri::HTML(open(region))
-      doc.search(".trail-table .trail-row a").map {|i| i.attribute("href").value}
+  def self.trails
+    output = self.area_urls.map do |area|
+      doc = Nokogiri::HTML(open(area[:url]))
+      doc.search(".trail-table .trail-row").map do |i|
+        output_hash = area.clone
+        output_hash[:name] = i.search("a.text-black strong").text
+        output_hash[:difficulty] = i.search("span.difficulty-text").text
+        output_hash
+      end
     end
     output.flatten
   end
   
-  def self.trails
-    self.trail_urls.map do |trail|
-      doc = Nokogiri::HTML(open(trail))
-      output = {}
-      output[:name] = doc.search("#trail-title").text.strip
-      output[:county] = doc.search("ol.breadcrumb li.breadcrumb-item a span.hidden-sm-down")[1].text
-      output[:difficulty] = doc.search("div.trail-subheader div.difficulty-banner span.difficulty-text").text
-      output
-    end
-    #doc = Nokogiri::HTML(open("https://www.mtbproject.com/trail/7008967/gatorback"))
-    #binding.pry
-  end
+  
 end
