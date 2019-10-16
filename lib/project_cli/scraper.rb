@@ -4,6 +4,24 @@ class ProjectCli::Scraper
     doc.search(".area a").map {|i| i.attribute("href").value}
   end
   
+  def self.area_urls
+    #return array of hashes with area name and trail_urls
+    #doc = Nokogiri::HTML(open("https://www.mtbproject.com/directory/8007797/central-florida#sub-areas"))
+    #binding.pry
+    area_hashes = self.scrape_region.map do |region|
+      doc = Nokogiri::HTML(open(region))
+      doc.search("div.col-sm-6 div.area a").map do |i|
+        output = {}
+        output[:region] = i.search("h1").text
+        output[:area] = i.search("div.link").text
+        output[:url] = i.attribute("href").value
+        output
+      end
+    end
+    area_hashes.flatten
+  end
+  
+  
   def self.trail_urls
     output = self.scrape_region.map do |region|
       doc = Nokogiri::HTML(open(region))
