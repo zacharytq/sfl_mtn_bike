@@ -1,33 +1,6 @@
 class ProjectCli::Cli
   def call
     puts "Looking for a trail?"
-
-    list_trails
-
-
-  end
-      
-      
-      
-  def recursive_search(list = ProjectCli::Trail.all, searchables = ["name", "region", "area", "difficulty, all, quit"], first = true)
-    quit_trigger = true
-    while quit_trigger
-      if first
-        puts "Would you like to search by region, county, difficulty? Or would you like to see all the trails?                  [region/county/difficulty/all/quit]"
-        input = gets.strip.downcase
-        
-        if searchables.any? {|i| i == input}
-          clone_array = searchables.reject{|j| j == input}
-          case input
-          when "name"
-            clone_array.clear
-            puts ""
-            
-      
-      
-      
-
-  def list_trails
     quit_trigger = true
     while quit_trigger
       puts "Would you like to search by region, county, difficulty? Or would you like to see all the trails?                  [region/county/difficulty/all/quit]"
@@ -49,10 +22,7 @@ class ProjectCli::Cli
       end
     end
   end
-  
-  def search_by_name
     
-
   def search_by_county
     second_level = true
     puts "Please enter county: [options]"

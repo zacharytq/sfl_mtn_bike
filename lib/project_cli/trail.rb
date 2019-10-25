@@ -41,19 +41,19 @@ class ProjectCli::Trail
   end
   
   def self.find_trails_by_area(input, list = self.all)
-    list.select {|i| i.area == input)
+    list.select {|i| i.area == input}
   end
   
   def self.find_trails_by_region(input, list = self.all)
-    list.select {|i| i.region == input)
+    list.select {|i| i.region == input}
   end
   
   def self.find_trails_by_difficulty(input, list = self.all)
-    list.select {|i| i.difficulty == input)
+    list.select {|i| i.difficulty == input}
   end
   
   def self.find_trail_by_name(input, list = self.all)
-    list.select {|i| i.name.downcase == input.downcase)
+    list.select {|i| i.name.downcase == input.downcase}
   end
   
   
