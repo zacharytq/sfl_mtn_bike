@@ -61,7 +61,7 @@ class ProjectCli::Trail
   end
   
   def self.find_trails_by_area(input, list = self.all)
-    list.select {|i| i.area == input}
+    list.select {|i| i.area.downcase == input.downcase}
   end
   
   def self.find_trails_by_region(input, list = self.all)
@@ -70,7 +70,9 @@ class ProjectCli::Trail
   
   def self.find_trails_by_difficulty(input, list = self.all)
     list.select do |i|
-      
+      if i.difficulty.split("/").any?{|j| j.downcase == input.downcase}
+        i
+      end
     end
   end
   
