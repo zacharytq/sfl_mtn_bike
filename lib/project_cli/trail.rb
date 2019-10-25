@@ -1,6 +1,8 @@
 
 class ProjectCli::Trail
-  attr_accessor :name, :area, :region, :difficulty
+  attr_accessor :name, :area, :region
+  attr_reader :difficulty
+  
   @@all = []
   def initialize
     @@all << self
@@ -8,6 +10,25 @@ class ProjectCli::Trail
 
   def self.all
     @@all
+  end
+  
+  def difficulty=(difficulty)
+    case difficulty
+    when "EasyEasy"
+      @difficulty = "Easy"
+    when "Easy/IntermediateEasy/Intermediate"
+      @difficulty = "Easy/Intermediate"
+    when "IntermediateIntermediate"
+      @difficulty = "Intermediate"
+    when "DifficultDifficult"
+      @difficulty = "Difficult"
+    when "Intermediate/DifficultIntermediate/Difficult"
+      @difficulty = "Intermediate/Difficult"
+    when "Extremely DifficultExtremely Difficult"
+      @difficulty = "Extremely Difficult"
+    else
+      @difficulty = "Unknown"
+    end
   end
 
   def self.list_all_trails
@@ -30,7 +51,6 @@ class ProjectCli::Trail
     new_trail.area = object[:area]
     new_trail.difficulty = object[:difficulty]
     new_trail.region = object[:region]
-    new_trail
     
   end
   
@@ -49,7 +69,9 @@ class ProjectCli::Trail
   end
   
   def self.find_trails_by_difficulty(input, list = self.all)
-    list.select {|i| i.difficulty == input}
+    list.select do |i|
+      
+    end
   end
   
   def self.find_trail_by_name(input, list = self.all)
