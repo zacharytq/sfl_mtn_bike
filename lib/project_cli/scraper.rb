@@ -12,7 +12,7 @@ class ProjectCli::Scraper
       doc = Nokogiri::HTML(open(region))
       doc.search("div.col-sm-6 div.area a").map do |i|
         output = {}
-        output[:region] = doc.search("h1")
+        output[:region] = doc.search("h1").text
         output[:area] = i.search("div.link").text
         output[:url] = i.attribute("href").value
         output

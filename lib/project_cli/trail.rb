@@ -21,7 +21,7 @@ class ProjectCli::Trail
   end
 
   def self.search_by_region(input)
-    self.all.select {|i| i.region == input.capitalize}
+    self.all.select {|i| i.region.downcase == input.downcase}
   end
   
   def self.create_from_object(object)
