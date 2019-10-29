@@ -4,7 +4,7 @@ class ProjectCli::Cli
     puts "Looking for a trail?"
     quit_trigger = true
     while quit_trigger
-      puts "Would you like to search by region, county, difficulty? Or would you like to see all the trails?                  [region/difficulty/area/all/quit]"
+      puts "Would you like to search by region, area, difficulty? Or would you like to see all the trails?                  [region/difficulty/area/all/quit]"
       input = gets.strip.downcase
 
       case input
